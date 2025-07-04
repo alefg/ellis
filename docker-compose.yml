@@ -1,0 +1,20 @@
+# Use uma versão recente do Docker Compose
+version: '3.8'
+
+# Define os serviços (contêineres) que compõem sua aplicação
+services:
+  # Serviço da sua aplicação principal
+  app:
+    # Constrói a imagem a partir do Dockerfile no diretório atual (.)
+    # O seu Dockerfile fornecido está correto para esta configuração.
+    build: .
+    # Nome do contêiner para fácil identificação
+    container_name: api
+    # Mapeia a porta 8000 do host para a porta 8000 do contêiner
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual no diretório /app do contêiner.
+    # Ideal para desenvolvimento, pois as alterações no código são refletidas
+    # imediatamente no contêiner (graças ao --reload do uvicorn no seu Dockerfile).
+    volumes:
+      - .:/app
